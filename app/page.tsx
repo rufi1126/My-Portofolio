@@ -61,7 +61,7 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-image">
-            <img src="/images/Foto-Saya.jpeg" alt="Muhammad Ma'rufil Kurhi" />
+            <img src="images/Foto-Saya.jpeg" alt="Muhammad Ma'rufil Kurhi" />
           </div>
         </div>
       </section>
@@ -129,7 +129,7 @@ export default function Home() {
               {
                 title: "Sekolah Python: Pelajari, Praktikkan, Kuasai",
                 desc: "Platform belajar pemrograman Python modern dengan kurikulum terstruktur, modul interaktif, dan kuis uji pemahaman.",
-                image: "/images/Sekolah-Python.png",
+                image: "images/Sekolah-Python.png",
                 details: [
                   "Kurikulum Berjenjang: Belajar mulai dari fondasi bahasa, struktur data, hingga implementasi tingkat lanjut yang relevan dengan industri.",
                   "Pembelajaran Berbasis Praktik: Fokus pada studi kasus dan pengerjaan proyek nyata agar setiap konsep dapat langsung diimplementasikan.",
@@ -142,7 +142,7 @@ export default function Home() {
               {
                 title: "Projecct 2 : Integrasi Dual-Engine Scanner Asinkron: Peningkatan Keamanan Web Menggunakan Nikto dan Nuclei pada Bot Telegram",
                 desc: "Sistem ini merupakan alat pemindaian keamanan web otomatis berbasis bot Telegram yang mengintegrasikan dual-engine scanner (Nikto dan Nuclei). Dengan arsitektur asinkron, sistem mampu melakukan pemindaian celah keamanan secara efisien, meminimalkan risiko pemblokiran firewall, dan menyajikan laporan real-time kepada pengguna.  ",
-                image: "/images/Bot-Telegram.png",
+                image: "images/Bot-Telegram.png",
                 details: [
                   "Integrasi Engine: Menggabungkan Nikto v2.6.0 untuk pemindaian header dan SSL, serta Nuclei v3.10.0 untuk mendeteksi kerentanan aplikasi web modern secara sekuensial.",
                   "Arsitektur Asinkron: Menggunakan pustaka asyncio pada backend Python untuk menjaga bot tetap responsif dalam melayani banyak pengguna saat proses pemindaian berat berlangsung.",
@@ -154,7 +154,7 @@ export default function Home() {
               {
                 title: "Project 3 : Testing Dashboard Monitoring Interior",
                 desc: "Mengembangkan halaman dashboard interaktif untuk monitoring jasa pemasangan interior.",
-                image: "/images/dashboard-interior.png",
+                image: "images/dashboard-interior.png",
                 details: [
                   "Melakukan analisa source code dan database website yang sudah ada.",
                   "Mengembangkan halaman dashboard interaktif yang terintegrasi dengan website existing.",
