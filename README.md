@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portofolio — Muhammad Ma'rufil Kurhi
 
-## Getting Started
+Website portofolio pribadi berbasis **Next.js 16** dengan static export, menampilkan profil, skills, proyek, dan kontak.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Struktur Folder
+
+```
+portofolio/
+├── app/                    # App Router Next.js
+│   ├── favicon.ico
+│   ├── globals.css         # Global styles + tema dark
+│   ├── layout.tsx          # Root layout (metadata + font)
+│   └── page.tsx            # Halaman utama (hero, about, skills, projects, contact)
+├── components/
+│   └── HeroCharacter.tsx   # Komponen 3D robot (Spline)
+├── public/
+│   └── images/             # Aset gambar (foto, screenshot proyek)
+├── .next/                  # Build output
+├── out/                    # Static export output
+├── .git/
+├── .github/
+├── .gitignore
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts          # Konfigurasi Next.js (basePath, export)
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Frontend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Teknologi       | Keterangan                                           |
+|----------------|------------------------------------------------------|
+| **Next.js 16** | Framework React dengan App Router                    |
+| **React 19**   | Library UI                                           |
+| **TypeScript** | Type safety                                          |
+| **CSS**        | Global stylesheet (`globals.css`) dengan custom properties (dark theme) |
+| **Spline**     | 3D interaktif (robot di hero section) via `@splinetool/react-spline` |
+| **react-icons**| Ikon skills (JavaScript, React, Node.js, dll.)       |
+| **Static Export** | `output: "export"` — output static file HTML/CSS/JS |
 
-## Learn More
+**Fitur:**
+- Navigasi smooth-scroll dengan navbar sticky
+- Hero section dengan 3D robot interaktif
+- Skill cards dengan animasi fall-down / rise-up
+- Project cards dengan expandable detail
+- Contact form → redirect ke WhatsApp
+- Fully responsive (desktop & mobile)
+- Deployable ke GitHub Pages (`basePath: "/My-Portofolio"`)
 
-To learn more about Next.js, take a look at the following resources:
+## Backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Proyek ini **tidak memiliki backend**. Seluruh aplikasi bersifat **static site** (CSR):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Contact form**: Mengirim pesan langsung ke WhatsApp via `window.open()` — tidak ada server, database, atau API.
+- **Data proyek & skills**: Hardcoded di dalam `page.tsx` (state React).
+- **Tidak ada** API Routes, database, atau server-side logic.
 
-## Deploy on Vercel
+Untuk menambahkan backend di masa depan, proyek ini dapat dengan mudah diintegrasikan dengan:
+- **Form backend** (Formspree, Web3Forms, dll.) untuk contact form.
+- **Headless CMS** (Sanity, Strapi) untuk konten dinamis.
+- **API Routes Next.js** jika tidak menggunakan static export.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Cara Menjalankan
+
+```bash
+npm install
+npm run dev        # Development server
+npm run build      # Build static export ke folder out/
+```
+
+## Lisensi
+
+© 2026 — Muhammad Ma'rufil Kurhi. All rights reserved.
