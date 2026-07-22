@@ -1,12 +1,57 @@
 "use client";
 
 import { useState } from "react";
+import HeroCharacter from "@/components/HeroCharacter";
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiHtml5,
+  SiTailwindcss,
+  SiGit,
+} from "react-icons/si";
+
 
 const basePath = process.env.NODE_ENV === "production" ? "/My-Portofolio" : "";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [skills, setSkills] = useState([
+    { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178c6" },
+    { name: "React", icon: SiReact, color: "#61dafb" },
+    { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+    { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+    { name: "HTML/CSS", icon: SiHtml5, color: "#e34f26" },
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06b6d4" },
+    { name: "Git", icon: SiGit, color: "#f05032" },
+  ]);
+
+  const [fallenSkills, setFallenSkills] = useState<Set<number>>(new Set());
+  const [risingSkills, setRisingSkills] = useState<Set<number>>(new Set());
+
+  const handleSkillClick = (index: number) => {
+    if (fallenSkills.has(index)) {
+      setRisingSkills(prev => new Set(prev).add(index));
+      setTimeout(() => {
+        setRisingSkills(prev => {
+          const next = new Set(prev);
+          next.delete(index);
+          return next;
+        });
+        setFallenSkills(prev => {
+          const next = new Set(prev);
+          next.delete(index);
+          return next;
+        });
+      }, 500);
+    } else {
+      setFallenSkills(prev => new Set(prev).add(index));
+    }
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -50,37 +95,44 @@ export default function Home() {
 
       <section id="hero" className="hero">
         <div className="hero-content">
-          <div className="hero-text">
+          <div className="hero-title-top">
             <h1>Halo, Saya <span className="highlight">Muhammad Ma'rufil Kurhi</span></h1>
-            <p>Membangun solusi digital profesional untuk bisnis Anda</p>
-            <div className="hero-buttons">
-              <button className="btn primary" onClick={() => scrollTo("projects")}>
-                Lihat Project
-              </button>
-              <button className="btn secondary" onClick={() => scrollTo("contact")}>
-                Hubungi Saya
-              </button>
-            </div>
           </div>
-          <div className="hero-image">
-            <img src={`${basePath}/images/Foto-Saya.jpeg`} alt="Muhammad Ma'rufil Kurhi" />
+          <div className="hero-middle">
+            <div className="hero-bg-text right">profesional untuk bisnis Anda</div>
+            <HeroCharacter />
+            <div className="hero-bg-text left">Membangun solusi digital</div>
+          </div>
+          <div className="hero-buttons-bottom">
+            <button className="btn primary" onClick={() => scrollTo("projects")}>
+              Lihat Project
+            </button>
+            <button className="btn secondary" onClick={() => scrollTo("contact")}>
+              Hubungi Saya
+            </button>
+            <a href="https://www.linkedin.com/in/moeh-maruf-140589377" target="_blank" rel="noopener noreferrer" className="btn social">
+              in
+            </a>
+            <a href="https://github.com/rufi1126" target="_blank" rel="noopener noreferrer" className="btn social">
+              GH
+            </a>
           </div>
         </div>
       </section>
 
       <section id="about" className="about">
         <div className="container">
-          <h2 className="section-title">Tentang Saya</h2>
+          <h2 className="section-title">About Me</h2>
           <div className="about-content">
+            <div className="about-image">
+              <img src={`${basePath}/images/Foto-Saya.jpeg`} alt="Muhammad Ma'rufil Kurhi" />
+            </div>
             <div className="about-text">
               <p>
-                Saya seorang pengembang yang memiliki passion dalam membuat
-                aplikasi web modern dan user-friendly. Saya selalu ingin belajar
-                hal baru dan tantangan.
+                Saya Mahasiswa Teknik Informatika dengan minat di bidang Web Development dan Cyber Security. Memiliki pengalaman dalam administrasi perkantoran serta pengembangan dan analisis sistem berbasis teknologi.
               </p>
               <p>
-                Dengan pengalaman di berbagai teknologi, saya siap membantu
-                mewujudkan ide-ide menjadi produk digital yang berkualitas.
+                Terbiasa menggunakan tools seperti Nmap dan Nikto untuk analisis keamanan dasar, serta memiliki kemampuan problem solving dan komunikasi yang baik.
               </p>
             </div>
             <div className="about-stats">
@@ -105,20 +157,17 @@ export default function Home() {
         <div className="container">
           <h2 className="section-title">Skills</h2>
           <div className="skills-grid">
-            {[
-              "JavaScript",
-              "TypeScript",
-              "React",
-              "Next.js",
-              "Node.js",
-              "HTML/CSS",
-              "Tailwind CSS",
-              "Git",
-            ].map((skill) => (
-              <div key={skill} className="skill-card">
-                {skill}
-              </div>
-            ))}
+            {skills.map((skill, i) => {
+              const Icon = skill.icon;
+              return (
+                <div key={skill.name} className={`skill-card ${fallenSkills.has(i) ? "fallen" : ""} ${risingSkills.has(i) ? "rising" : ""}`} onClick={() => handleSkillClick(i)}>
+                  <span className="skill-icon" style={{ color: skill.color }}>
+                    <Icon />
+                  </span>
+                  <span className="skill-name">{skill.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -214,7 +263,15 @@ export default function Home() {
       <section id="contact" className="contact">
         <div className="container">
           <h2 className="section-title">Hubungi Saya</h2>
-          <form className="contact-form" action="https://formspree.io/f/xxxxxx" method="POST">
+          <form className="contact-form" onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const nama = (form.elements.namedItem("nama") as HTMLInputElement).value;
+            const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+            const pesan = (form.elements.namedItem("pesan") as HTMLTextAreaElement).value;
+            const waText = `Halo, saya ${nama}%0AEmail: ${email}%0A%0A${pesan}`;
+            window.open(`https://wa.me/6281398632129?text=${waText}`, "_blank");
+          }}>
             <input type="text" name="nama" placeholder="Nama" required />
             <input type="email" name="email" placeholder="Email" required />
             <textarea name="pesan" placeholder="Pesan" rows={5} required />
